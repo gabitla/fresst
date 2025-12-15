@@ -1,0 +1,992 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NovaMind Automation - Automatizamos tu Negocio</title>
+    <link rel="icon" type="images/icono.ico" href="images/icono.ico">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            color: #1B2A41;
+            overflow-x: hidden;
+        }
+
+        /* Navigation Menu */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: rgba(27, 42, 65, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            padding: 1rem 0;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .nav-logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-weight: 700;
+            font-size: 1.2rem;
+            text-decoration: none;
+            color: #fff;
+        }
+
+        .logo-icon {
+            width: 36px;
+            height: 36px;
+            object-fit: contain;
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        .nav-menu a {
+            color: #FFFFFF;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
+            font-size: 0.95rem;
+        }
+
+        .nav-menu a:hover {
+            color: #2F80ED;
+        }
+
+        .menu-toggle {
+            display: none;
+            background: none;
+            border: none;
+            color: #FFFFFF;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        /* Hero Section */
+        .hero {
+            /* INSTRUCCIÓN: Agrega tu imagen de fondo aquí */
+            /* Ejemplo: background-image: url('ruta-de-tu-imagen.jpg'); */
+            background: linear-gradient(135deg, #2F80ED 0%, #9B51E0 100%);
+            background-image: url(images/portada.png);
+            background-size: cover;
+            background-position: center;
+            /*background-attachment: fixed;*/
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 2rem;
+            position: relative;
+            overflow: hidden;
+            margin-top: 70px;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at 20% 50%, rgba(155, 81, 224, 0.3) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(47, 128, 237, 0.3) 0%, transparent 50%);
+            pointer-events: none;
+        }
+
+        .hero-content {
+            max-width: 800px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero h1 {
+            font-size: clamp(2rem, 5vw, 3.5rem);
+            font-weight: 700;
+            color: #FFFFFF;
+            margin-bottom: 1.5rem;
+            line-height: 1.2;
+        }
+
+        .hero p {
+            font-size: clamp(1rem, 2.5vw, 1.25rem);
+            font-weight: 400;
+            color: #FFFFFF;
+            margin-bottom: 2.5rem;
+            opacity: 0.95;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background: #FFFFFF;
+            color: #2F80ED;
+            padding: 1rem 2.5rem;
+            font-size: 1.1rem;
+            font-weight: 600;
+            text-decoration: none;
+            border-radius: 50px;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Container */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+        }
+
+        /* Section */
+        section {
+            padding: 5rem 0;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: clamp(1.75rem, 4vw, 2.5rem);
+            font-weight: 700;
+            color: #1B2A41;
+            margin-bottom: 3rem;
+        }
+
+        /* About Section */
+        .about {
+            background: #F5F7FA;
+        }
+
+        .about-content {
+            max-width: 900px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .about-content p {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: #000000;
+            margin-bottom: 1.5rem;
+        }
+
+        .about-highlight {
+            background: linear-gradient(135deg, #2F80ED 0%, #9B51E0 100%);
+            color: #FFFFFF;
+            padding: 2rem;
+            border-radius: 15px;
+            margin-top: 2rem;
+        }
+
+        .about-highlight h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        /* Categories */
+        .categories {
+            background: #F5F7FA;
+        }
+
+        .categories-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .category-card {
+            background: #FFFFFF;
+            padding: 2rem;
+            border-radius: 15px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+            border: 2px solid transparent;
+        }
+
+        .category-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(47, 128, 237, 0.2);
+            border-color: #2F80ED;
+        }
+
+        .category-card.active {
+            background: linear-gradient(135deg, #2F80ED 0%, #9B51E0 100%);
+            color: #FFFFFF;
+            border-color: #9B51E0;
+        }
+
+        .category-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .category-card h3 {
+            font-size: 1.25rem;
+            font-weight: 600;
+        }
+
+        /* Products */
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .product-card {
+            background: #FFFFFF;
+            border-radius: 15px;
+            padding: 2rem;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .product-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 40px rgba(47, 128, 237, 0.2);
+        }
+
+        .product-card h3 {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: #1B2A41;
+            margin-bottom: 0.5rem;
+        }
+
+        .product-category {
+            display: inline-block;
+            background: linear-gradient(135deg, #2F80ED 0%, #9B51E0 100%);
+            color: #FFFFFF;
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            margin-bottom: 1.5rem;
+        }
+
+        .product-button {
+            display: block;
+            width: 100%;
+            background: linear-gradient(135deg, #2F80ED 0%, #9B51E0 100%);
+            color: #FFFFFF;
+            padding: 0.875rem;
+            text-align: center;
+            text-decoration: none;
+            border-radius: 10px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            margin-top: 1rem;
+        }
+
+        .product-button:hover {
+            transform: scale(1.05);
+            box-shadow: 0 5px 20px rgba(47, 128, 237, 0.4);
+        }
+
+        /* ESPACIO PARA IMAGEN DEL PRODUCTO */
+        .product-image {
+            width: 100%;
+            height: 200px;
+            background: linear-gradient(135deg, #e0e7ff 0%, #f0f4ff 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .product-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        /* Placeholder cuando no hay imagen */
+        .product-image::before {
+            content: '📦';
+            font-size: 3rem;
+            opacity: 0.3;
+            position: absolute;
+        }
+
+        .product-image img~ ::before {
+            display: none;
+        }
+
+        .product-info {
+            padding: 1.5rem;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .product-card h3 {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: #1B2A41;
+            margin-bottom: 0.5rem;
+        }
+
+        .product-category {
+            display: inline-block;
+            background: linear-gradient(135deg, #2F80ED 0%, #9B51E0 100%);
+            color: #FFFFFF;
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            margin-bottom: 1.5rem;
+        }
+
+        .product-button {
+            display: block;
+            width: 100%;
+            background: linear-gradient(135deg, #2F80ED 0%, #9B51E0 100%);
+            color: #FFFFFF;
+            padding: 0.875rem;
+            text-align: center;
+            text-decoration: none;
+            border-radius: 10px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            margin-top: 1rem;
+        }
+
+        .product-button:hover {
+            transform: scale(1.05);
+            box-shadow: 0 5px 20px rgba(47, 128, 237, 0.4);
+        }
+
+        /* CTA WhatsApp Section */
+        .cta-whatsapp {
+            background: linear-gradient(135deg, #1B2A41 0%, #2F80ED 100%);
+            text-align: center;
+            color: #FFFFFF;
+        }
+
+        .cta-whatsapp h2 {
+            font-size: clamp(1.75rem, 4vw, 2.5rem);
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: #FFFFFF;
+        }
+
+        .cta-whatsapp p {
+            font-size: 1.1rem;
+            margin-bottom: 2rem;
+            opacity: 0.95;
+        }
+
+        .whatsapp-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.75rem;
+            background: #25D366;
+            color: #FFFFFF;
+            padding: 1.25rem 3rem;
+            font-size: 1.2rem;
+            font-weight: 600;
+            text-decoration: none;
+            border-radius: 50px;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 30px rgba(37, 211, 102, 0.3);
+        }
+
+        .whatsapp-button:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(37, 211, 102, 0.5);
+        }
+
+        /* Trust Section */
+        .trust {
+            background: #F5F7FA;
+            text-align: center;
+        }
+
+        .trust-features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .trust-item {
+            padding: 1.5rem;
+        }
+
+        .trust-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            color: #2F80ED;
+        }
+
+        .trust-item h3 {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: #1B2A41;
+        }
+
+        .trust-item p {
+            color: #666;
+            line-height: 1.6;
+        }
+
+        /* Footer */
+        footer {
+            background: #1B2A41;
+            color: #FFFFFF;
+            padding: 3rem 0 2rem;
+            text-align: center;
+        }
+
+        .footer-content h3 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+
+        .footer-contact {
+            margin: 1.5rem 0;
+            font-size: 1.1rem;
+        }
+
+        .footer-contact a {
+            color: #2F80ED;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer-contact a:hover {
+            color: #9B51E0;
+        }
+
+        .footer-copy {
+            margin-top: 2rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            font-size: 0.9rem;
+            opacity: 0.7;
+        }
+
+        /* Filter Controls */
+        .filter-info {
+            text-align: center;
+            margin: 2rem 0 1rem;
+            font-size: 1rem;
+            color: #666;
+        }
+
+        .clear-filter {
+            display: inline-block;
+            background: #9B51E0;
+            color: #FFFFFF;
+            padding: 0.5rem 1.5rem;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+            margin-left: 1rem;
+        }
+
+        .clear-filter:hover {
+            background: #2F80ED;
+            transform: scale(1.05);
+        }
+
+        .product-card.hidden {
+            display: none;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            section {
+                padding: 3rem 0;
+            }
+
+            .categories-grid {
+                grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            }
+
+            .products-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Navigation Menu -->
+    <nav>
+        <div class="nav-container">
+            <a href="#" class="nav-logo">
+                <img src="images/LogoFresst.png" alt="FRESST logo" class="logo-icon">
+                <span>FRESST</span>
+            </a>
+            <button class="menu-toggle" id="menu-toggle">☰</button>
+            <ul class="nav-menu" id="nav-menu">
+                <li><a href="#sobre-nosotros">Sobre Nosotros</a></li>
+                <li><a href="#categorias">Categorías</a></li>
+                <li><a href="#productos">Productos</a></li>
+                <li><a href="#contacto">Contáctanos</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero" id="inicio">
+        <div class="hero-content">
+            <h1>Equipamiento profesional para tu negocio</h1>
+            <p>Automatizamos tu proceso de cotización con atención inmediata por WhatsApp</p>
+            <a href="https://wa.me/593XXXXXXXXX?text=Hola,%20quiero%20una%20cotización" class="cta-button">Cotizar por
+                WhatsApp</a>
+        </div>
+    </section>
+    <!-- About Section -->
+    <section class="about" id="sobre-nosotros">
+        <div class="container">
+            <div>
+            <h2 class="section-title">Sobre Fresst</h2>
+
+            <div class="about-content">
+                <p>Somos <strong>Fresst</strong>, líderes en equipamiento profesional para negocios gastronómicos y
+                    comerciales. Con años de experiencia en el mercado, nos especializamos en proporcionar soluciones
+                    completas de refrigeración, cocción, mobiliario y equipos especiales.</p>
+                <p>Nuestro compromiso es ofrecer productos de la más alta calidad, respaldados por un servicio de
+                    atención personalizada que garantiza la mejor experiencia para nuestros clientes.</p>
+                <div class="about-highlight">
+                    <h3>Nuestra Misión</h3>
+                    <p>Equipar tu negocio con tecnología de vanguardia, brindando soluciones eficientes que impulsen el
+                        crecimiento y éxito de tu empresa.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- Categories Section -->
+    <section class="categories" id="categorias">
+        <div class="container">
+            <h2 class="section-title">Categorías de Productos</h2>
+            <div class="categories-grid">
+                <div class="category-card" data-category="refrigeracion">
+                    <div class="category-icon">
+                        <img src="images/ventilador.png" alt="ventilador" style="width: 40px; height: 40px;">
+                    </div>
+                    <h3>Refrigeración</h3>
+                </div>
+                <div class="category-card" data-category="coccion">
+                    <div class="category-icon">
+                        <img src="images/horno.png" alt="horno" style="width: 40px; height: 40px;">
+                    </div>
+                    <h3>Cocción</h3>
+                </div>
+                <div class="category-card" data-category="mobiliario">
+                    <div class="category-icon">🪑</div>
+                    <h3>Mobiliario</h3>
+                </div>
+                <div class="category-card" data-category="especiales">
+                    <div class="category-icon">
+                        <img src="images/vaso.png" alt="vaso" style="width: 40px; height: 40px;">
+                    </div>
+                    <h3>Equipos Especiales</h3>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Products Section -->
+    <section class="products" id="productos">
+        <div class="container">
+            <h2 class="section-title">Nuestros Productos</h2>
+            <div class="filter-info">
+                <span id="filter-text">Mostrando todos los productos</span>
+                <a href="#" class="clear-filter" id="clear-filter" style="display: none;">Ver todos</a>
+            </div>
+            <div class="products-grid" id="products-grid">
+                <!-- Refrigeración -->
+                <div class="product-card" data-category="refrigeracion">
+                    <div class="product-image">
+                        <img src="images/frigorifico.png" alt="Frigoríficos" onerror="this.style.display='none'">
+                    </div>
+                    <div>
+                        <h3>Frigoríficos</h3>
+                        <span class="product-category">Refrigeración</span>
+                    </div>
+                    <a href="https://wa.me/593XXXXXXXXX?text=Hola,%20quiero%20cotizar%20el%20producto:%20Frigoríficos"
+                        class="product-button">Cotizar por WhatsApp</a>
+                </div>
+                <div class="product-card" data-category="refrigeracion">
+                    <div class="product-image">
+                        <img src="images/frigoVertical.jpg" alt="Vitrinas Horizontales" onerror="this.style.display='none'">
+                    </div>
+                    <div>
+                        <h3>Vitrinas Horizontales</h3>
+                        <span class="product-category">Refrigeración</span>
+                    </div>
+                    <a href="https://wa.me/593XXXXXXXXX?text=Hola,%20quiero%20cotizar%20el%20producto:%20Vitrinas%20Horizontales"
+                        class="product-button">Cotizar por WhatsApp</a>
+                </div>
+                <div class="product-card" data-category="refrigeracion">
+                    <div class="product-image">
+                        <img src="images/panoramica.jpg" alt="Vitrinas Verticales" onerror="this.style.display='none'">
+                    </div>
+                    <div>
+                        <h3>Vitrinas Verticales</h3>
+                        <span class="product-category">Refrigeración</span>
+                    </div>
+                    <a href="https://wa.me/593XXXXXXXXX?text=Hola,%20quiero%20cotizar%20el%20producto:%20Vitrinas%20Verticales"
+                        class="product-button">Cotizar por WhatsApp</a>
+                </div>
+                <div class="product-card" data-category="refrigeracion">
+                    <div class="product-image">
+                        <img src="images/mostradores_caja.jpg" alt="Vitrinas con Caja">
+                    </div>
+                    <div>
+                        <h3>Vitrinas con Caja</h3>
+                        <span class="product-category">Refrigeración</span>
+                    </div>
+                    <a href="https://wa.me/593XXXXXXXXX?text=Hola,%20quiero%20cotizar%20el%20producto:%20Vitrinas%20con%20Caja"
+                        class="product-button">Cotizar por WhatsApp</a>
+                </div>
+                <div class="product-card" data-category="refrigeracion">
+                    <div class="product-image">
+                        <img src="images/mostradores_sin_caja.jpg" alt="Vitrinas sin Caja" onerror="this.style.display='none'">
+                    </div>
+                    <div>
+                        <h3>Vitrinas sin Caja</h3>
+                        <span class="product-category">Refrigeración</span>
+                    </div>
+                    <a href="https://wa.me/593XXXXXXXXX?text=Hola,%20quiero%20cotizar%20el%20producto:%20Vitrinas%20sin%20Caja"
+                        class="product-button">Cotizar por WhatsApp</a>
+                </div>
+                <div class="product-card" data-category="refrigeracion">
+                    <div class="product-image">
+                        <img src="images/bomboneras.png" alt="Bomboneras" onerror="this.style.display='none'">
+                    </div>
+                    <div>
+                        <h3>Bomboneras</h3>
+                        <span class="product-category">Refrigeración</span>
+                    </div>
+                    <a href="https://wa.me/593XXXXXXXXX?text=Hola,%20quiero%20cotizar%20el%20producto:%20Bomboneras"
+                        class="product-button">Cotizar por WhatsApp</a>
+                </div>
+
+                <!-- Cocción -->
+                <div class="product-card" data-category="coccion">
+                    <div class="product-image">
+                        <img src="images/horno.jpg" alt="Hornos" onerror="this.style.display='none'">
+                    </div>
+                    <div>
+                        <h3>Hornos</h3>
+                        <span class="product-category">Cocción</span>
+                    </div>
+                    <a href="https://wa.me/593XXXXXXXXX?text=Hola,%20quiero%20cotizar%20el%20producto:%20Hornos"
+                        class="product-button">Cotizar por WhatsApp</a>
+                </div>
+                <div class="product-card" data-category="coccion">
+                    <div class="product-image">
+                        <img src="images/freidora.jpg" alt="Freidoras" onerror="this.style.display='none'">
+                    </div>
+                    <div>
+                        <h3>Freidoras</h3>
+                        <span class="product-category">Cocción</span>
+                    </div>
+                    <a href="https://wa.me/593XXXXXXXXX?text=Hola,%20quiero%20cotizar%20el%20producto:%20Freidoras"
+                        class="product-button">Cotizar por WhatsApp</a>
+                </div>
+                <div class="product-card" data-category="coccion">
+                    <div class="product-image">
+                        <img src="images/cocina.jpg" alt="Cocinas" onerror="this.style.display='none'">
+                    </div>
+                    <div>
+                        <h3>Cocinas</h3>
+                        <span class="product-category">Cocción</span>
+                    </div>
+                    <a href="https://wa.me/593XXXXXXXXX?text=Hola,%20quiero%20cotizar%20el%20producto:%20Cocinas"
+                        class="product-button">Cotizar por WhatsApp</a>
+                </div>
+                <div class="product-card" data-category="coccion">
+                    <div class="product-image">
+                        <img src="images/asadero.jpg" alt="Asaderos" onerror="this.style.display='none'">
+                    </div>
+                    <div>
+                        <h3>Asaderos</h3>
+                        <span class="product-category">Cocción</span>
+                    </div>
+                    <a href="https://wa.me/593XXXXXXXXX?text=Hola,%20quiero%20cotizar%20el%20producto:%20Asaderos"
+                        class="product-button">Cotizar por WhatsApp</a>
+                </div>
+                <div class="product-card" data-category="coccion">
+                    <div class="product-image">
+                        <img src="images/salchipapera.jpg" alt="Salchipaperas" onerror="this.style.display='none'">
+                    </div>
+                    <div>
+                        <h3>Salchipaperas</h3>
+                        <span class="product-category">Cocción</span>
+                    </div>
+                    <a href="https://wa.me/593XXXXXXXXX?text=Hola,%20quiero%20cotizar%20el%20producto:%20Salchipaperas"
+                        class="product-button">Cotizar por WhatsApp</a>
+                </div>
+
+                <!-- Mobiliario -->
+                <div class="product-card" data-category="mobiliario">
+                    <div class="product-image">
+                        <img src="images/mesa_acero.png" alt="Mesas de Acero" onerror="this.style.display='none'">
+                    </div>
+                    <div>
+                        <h3>Mesas de Acero</h3>
+                        <span class="product-category">Mobiliario</span>
+                    </div>
+                    <a href="https://wa.me/593XXXXXXXXX?text=Hola,%20quiero%20cotizar%20el%20producto:%20Mesas%20de%20Acero"
+                        class="product-button">Cotizar por WhatsApp</a>
+                </div>
+                <div class="product-card" data-category="mobiliario">
+                    <div class="product-image">
+                        <img src="images/estanteria1.png" alt="Estanterías" onerror="this.style.display='none'">
+                    </div>
+                    <div>
+                        <h3>Estanterías</h3>
+                        <span class="product-category">Mobiliario</span>
+                    </div>
+                    <a href="https://wa.me/593XXXXXXXXX?text=Hola,%20quiero%20cotizar%20el%20producto:%20Estanterías"
+                        class="product-button">Cotizar por WhatsApp</a>
+                </div>
+                <div class="product-card" data-category="mobiliario">
+                    <div class="product-image">
+                        <img src="images/gondola.jpg" alt="Góndolas" onerror="this.style.display='none'">
+                    </div>
+                    <div>
+                        <h3>Góndolas</h3>
+                        <span class="product-category">Mobiliario</span>
+                    </div>
+                    <a href="https://wa.me/593XXXXXXXXX?text=Hola,%20quiero%20cotizar%20el%20producto:%20Góndolas"
+                        class="product-button">Cotizar por WhatsApp</a>
+                </div>
+                <div class="product-card" data-category="mobiliario">
+                    <div class="product-image">
+                        <img src="images/panadera.png" alt="Paneras" onerror="this.style.display='none'">
+                    </div>
+                    <div>
+                        <h3>Paneras</h3>
+                        <span class="product-category">Mobiliario</span>
+                    </div>
+                    <a href="https://wa.me/593XXXXXXXXX?text=Hola,%20quiero%20cotizar%20el%20producto:%20Paneras"
+                        class="product-button">Cotizar por WhatsApp</a>
+                </div>
+
+                <!-- Equipos Especiales -->
+                <div class="product-card" data-category="especiales">
+                    <div class="product-image">
+                        <img src="images/hotdog.png" alt="Carros de Hotdogs" onerror="this.style.display='none'">
+                    </div>
+                    <div>
+                        <h3>Carros de Hotdogs</h3>
+                        <span class="product-category">Equipos Especiales</span>
+                    </div>
+                    <a href="https://wa.me/593XXXXXXXXX?text=Hola,%20quiero%20cotizar%20el%20producto:%20Carros%20de%20Hotdogs"
+                        class="product-button">Cotizar por WhatsApp</a>
+                </div>
+                <div class="product-card" data-category="especiales">
+                    <div class="product-image">
+                        <img src="images/balanza_normal.jpg" alt="Balanza" onerror="this.style.display='none'">
+                    </div>
+                    <div>
+                        <h3>Balanza</h3>
+                        <span class="product-category">Equipos Especiales</span>
+                    </div>
+                    <a href="https://wa.me/593XXXXXXXXX?text=Hola,%20quiero%20cotizar%20el%20producto:%20Balanza"
+                        class="product-button">Cotizar por WhatsApp</a>
+                </div>
+                <div class="product-card" data-category="especiales">
+                    <div class="product-image">
+                        <img src="images/balanza.png" alt="Balanza Digital" onerror="this.style.display='none'">
+                    </div>
+                    <div>
+                        <h3>Balanza Digital</h3>
+                        <span class="product-category">Equipos Especiales</span>
+                    </div>
+                    <a href="https://wa.me/593XXXXXXXXX?text=Hola,%20quiero%20cotizar%20el%20producto:%20Balanza%20Digital"
+                        class="product-button">Cotizar por WhatsApp</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA WhatsApp Section -->
+    <section class="cta-whatsapp" id="contacto">
+        <div class="container">
+            <h2>¿Listo para equipar tu negocio?</h2>
+            <p>Obtén tu cotización personalizada en minutos. Nuestro equipo está listo para atenderte.</p>
+            <a href="https://wa.me/593XXXXXXXXX?text=Hola,%20quiero%20una%20cotización" class="whatsapp-button">
+                <span style="font-size: 1.5rem;">💬</span>
+                Cotizar ahora por WhatsApp
+            </a>
+        </div>
+    </section>
+
+    <!-- Trust Section -->
+    <section class="trust">
+        <div class="container">
+            <h2 class="section-title">¿Por qué elegirnos?</h2>
+            <div class="trust-features">
+                <div class="trust-item">
+                    <div class="trust-icon">
+                        <img src="images/relampago.png" alt="Relámpago" style="width: 50px; height: 50px;">
+                    </div>
+                    <h3>Respuesta Inmediata</h3>
+                    <p>Atención personalizada por WhatsApp en tiempo real para todas tus consultas.</p>
+                </div>
+                <div class="trust-item">
+                    <div class="trust-icon">
+                        <img src="images/calidad.png" alt="calidad" style="width: 50px; height: 50px;">
+                    </div>
+                    <h3>Calidad Garantizada</h3>
+                    <p>Equipamiento profesional de las mejores marcas con garantía total.</p>
+                </div>
+                <div class="trust-item">
+                    <div class="trust-icon">
+                        <img src="images/entrega-urgente.png" alt="entrega urgente" style="width: 50px; height: 50px;   ">
+                    </div>
+                    <h3>Entrega Rápida</h3>
+                    <p>Servicio de instalación y entrega en todo el país.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <h3>NovaMind Automation</h3>
+                <div class="footer-contact">
+                    <p>Contáctanos: <a href="https://wa.me/593XXXXXXXXX">WhatsApp</a></p>
+                </div>
+                <div class="footer-copy">
+                    <p>&copy; 2024 NovaMind Automation. Todos los derechos reservados.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Category Filter
+        const categoryCards = document.querySelectorAll('.category-card');
+        const productCards = document.querySelectorAll('.product-card');
+        const filterText = document.getElementById('filter-text');
+        const clearFilterBtn = document.getElementById('clear-filter');
+        let activeCategory = null;
+
+        categoryCards.forEach(card => {
+            card.addEventListener('click', () => {
+                const category = card.getAttribute('data-category');
+
+                if (activeCategory === category) {
+                    // Deselect
+                    card.classList.remove('active');
+                    activeCategory = null;
+                    showAllProducts();
+                } else {
+                    // Select new category
+                    categoryCards.forEach(c => c.classList.remove('active'));
+                    card.classList.add('active');
+                    activeCategory = category;
+                    filterProducts(category);
+                }
+            });
+        });
+
+        clearFilterBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            categoryCards.forEach(c => c.classList.remove('active'));
+            activeCategory = null;
+            showAllProducts();
+        });
+
+        function filterProducts(category) {
+            let count = 0;
+            productCards.forEach(product => {
+                if (product.getAttribute('data-category') === category) {
+                    product.classList.remove('hidden');
+                    count++;
+                } else {
+                    product.classList.add('hidden');
+                }
+            });
+
+            const categoryName = getCategoryName(category);
+            filterText.textContent = `Mostrando ${count} productos de ${categoryName}`;
+            clearFilterBtn.style.display = 'inline-block';
+
+            // Scroll to products
+            document.getElementById('products-grid').scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+
+        function showAllProducts() {
+            productCards.forEach(product => {
+                product.classList.remove('hidden');
+            });
+            filterText.textContent = 'Mostrando todos los productos';
+            clearFilterBtn.style.display = 'none';
+        }
+
+        function getCategoryName(category) {
+            const names = {
+                'refrigeracion': 'Refrigeración',
+                'coccion': 'Cocción',
+                'mobiliario': 'Mobiliario',
+                'especiales': 'Equipos Especiales'
+            };
+            return names[category] || category;
+        }
+
+        // Smooth scroll for all anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth' });
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>
