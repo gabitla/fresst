@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NovaMind Automation - Automatizamos tu Negocio</title>
+    <title>FRESST - Equipamiento Profesional</title>
     <link rel="icon" type="images/icono.ico" href="images/icono.ico">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -90,13 +90,10 @@
 
         /* Hero Section */
         .hero {
-            /* INSTRUCCIÓN: Agrega tu imagen de fondo aquí */
-            /* Ejemplo: background-image: url('ruta-de-tu-imagen.jpg'); */
             background: linear-gradient(135deg, #2F80ED 0%, #9B51E0 100%);
             background-image: url(images/portada.png);
             background-size: cover;
             background-position: center;
-            /*background-attachment: fixed;*/
             min-height: 100vh;
             display: flex;
             align-items: center;
@@ -143,21 +140,36 @@
         }
 
         .cta-button {
-            display: inline-block;
-            background: #FFFFFF;
-            color: #2F80ED;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.75rem;
+            background: #25D366;
+            color: #FFFFFF;
             padding: 1rem 2.5rem;
             font-size: 1.1rem;
             font-weight: 600;
             text-decoration: none;
             border-radius: 50px;
             transition: all 0.3s ease;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            box-shadow: 0 10px 30px rgba(37, 211, 102, 0.3);
+            border: none;
+            cursor: pointer;
+            min-width: 200px;
         }
 
         .cta-button:hover {
             transform: translateY(-3px);
-            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
+            box-shadow: 0 15px 40px rgba(37, 211, 102, 0.5);
+            background: #1fb855;
+        }
+
+        .cta-button:disabled {
+            opacity: 0.7;
+            cursor: not-allowed;
+        }
+
+        .cta-button.loading {
+            opacity: 0.7;
         }
 
         /* Container */
@@ -308,22 +320,6 @@
             object-fit: cover;
         }
 
-        .image-container::before {
-            content: '👔';
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            font-size: 6rem;
-            opacity: 0.2;
-            z-index: 1;
-        }
-
-        .image-container img:not([src=""]) ~ ::before {
-            display: none;
-        }
-
-
         /* Categories */
         .categories {
             background: #F5F7FA;
@@ -379,12 +375,13 @@
         .product-card {
             background: #FFFFFF;
             border-radius: 15px;
-            padding: 2rem;
+            padding: 0;
             box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
             transition: all 0.3s ease;
             display: flex;
             flex-direction: column;
             justify-content: space-between;
+            overflow: hidden;
         }
 
         .product-card:hover {
@@ -392,44 +389,6 @@
             box-shadow: 0 15px 40px rgba(47, 128, 237, 0.2);
         }
 
-        .product-card h3 {
-            font-size: 1.25rem;
-            font-weight: 600;
-            color: #1B2A41;
-            margin-bottom: 0.5rem;
-        }
-
-        .product-category {
-            display: inline-block;
-            background: linear-gradient(135deg, #2F80ED 0%, #9B51E0 100%);
-            color: #FFFFFF;
-            padding: 0.25rem 0.75rem;
-            border-radius: 20px;
-            font-size: 0.85rem;
-            font-weight: 500;
-            margin-bottom: 1.5rem;
-        }
-
-        .product-button {
-            display: block;
-            width: 100%;
-            background: linear-gradient(135deg, #2F80ED 0%, #9B51E0 100%);
-            color: #FFFFFF;
-            padding: 0.875rem;
-            text-align: center;
-            text-decoration: none;
-            border-radius: 10px;
-            font-weight: 600;
-            transition: all 0.3s ease;
-            margin-top: 1rem;
-        }
-
-        .product-button:hover {
-            transform: scale(1.05);
-            box-shadow: 0 5px 20px rgba(47, 128, 237, 0.4);
-        }
-
-        /* ESPACIO PARA IMAGEN DEL PRODUCTO */
         .product-image {
             width: 100%;
             height: 200px;
@@ -445,17 +404,6 @@
             width: 100%;
             height: 100%;
             object-fit: cover;
-        }
-
-        /* Placeholder cuando no hay imagen */
-        .product-image::before {
-            font-size: 3rem;
-            opacity: 0.3;
-            position: absolute;
-        }
-
-        .product-image img~ ::before {
-            display: none;
         }
 
         .product-info {
@@ -482,12 +430,13 @@
             font-size: 0.85rem;
             font-weight: 500;
             margin-bottom: 1.5rem;
+            width: fit-content;
         }
 
         .product-button {
             display: block;
             width: 100%;
-            background: linear-gradient(135deg, #2F80ED 0%, #9B51E0 100%);
+            background: linear-gradient(135deg, #25D366 0%, #1fb855 100%);
             color: #FFFFFF;
             padding: 0.875rem;
             text-align: center;
@@ -496,11 +445,19 @@
             font-weight: 600;
             transition: all 0.3s ease;
             margin-top: 1rem;
+            border: none;
+            cursor: pointer;
+            font-size: 0.95rem;
         }
 
         .product-button:hover {
             transform: scale(1.05);
-            box-shadow: 0 5px 20px rgba(47, 128, 237, 0.4);
+            box-shadow: 0 5px 20px rgba(37, 211, 102, 0.4);
+        }
+
+        .product-button:disabled {
+            opacity: 0.7;
+            cursor: not-allowed;
         }
 
         /* CTA WhatsApp Section */
@@ -536,11 +493,19 @@
             border-radius: 50px;
             transition: all 0.3s ease;
             box-shadow: 0 10px 30px rgba(37, 211, 102, 0.3);
+            border: none;
+            cursor: pointer;
         }
 
         .whatsapp-button:hover {
             transform: translateY(-5px);
             box-shadow: 0 15px 40px rgba(37, 211, 102, 0.5);
+            background: #1fb855;
+        }
+
+        .whatsapp-button:disabled {
+            opacity: 0.7;
+            cursor: not-allowed;
         }
 
         /* Trust Section */
@@ -634,6 +599,8 @@
             font-size: 0.9rem;
             transition: all 0.3s ease;
             margin-left: 1rem;
+            cursor: pointer;
+            border: none;
         }
 
         .clear-filter:hover {
@@ -643,6 +610,17 @@
 
         .product-card.hidden {
             display: none;
+        }
+
+        .error-message {
+            color: #d32f2f;
+            font-size: 0.9rem;
+            margin-top: 0.5rem;
+            display: none;
+        }
+
+        .error-message.show {
+            display: block;
         }
 
         /* Responsive */
@@ -664,10 +642,6 @@
 
             .about-main-title {
                 text-align: center;
-            }
-
-            .about-description {
-                text-align: left;
             }
         }
 
@@ -693,10 +667,6 @@
                 display: block;
             }
 
-            .nav-logo {
-                font-size: 1.2rem;
-            }
-
             section {
                 padding: 3rem 0;
             }
@@ -708,54 +678,6 @@
 
             .products-grid {
                 grid-template-columns: 1fr;
-            }
-
-            .about-wrapper {
-                grid-template-columns: 1fr;
-                gap: 2rem;
-            }
-
-            .about-main-title {
-                font-size: 2.5rem;
-                text-align: center;
-            }
-
-            .social-icons {
-                position: static;
-                justify-content: center;
-                margin-top: 1rem;
-                margin-bottom: 1.5rem;
-            }
-
-            .about-description {
-                text-align: center;
-                font-size: 1rem;
-            }
-
-            .about-image-right {
-                height: 300px;
-                margin: 0 auto;
-            }
-
-            .image-decoration {
-                width: 250px;
-                height: 250px;
-                right: 0;
-                left: 50%;
-                transform: translate(-50%, -50%);
-            }
-
-            .image-container {
-                width: 240px;
-                height: 240px;
-                border-width: 6px;
-            }
-
-            .image-decoration::before {
-                width: 150px;
-                height: 150px;
-                top: -50px;
-                right: 50px;
             }
 
             .hero {
@@ -771,61 +693,23 @@
             .hero p {
                 font-size: 1rem;
             }
+
+            .cta-button {
+                width: 100%;
+                min-width: auto;
+            }
         }
 
         @media (max-width: 480px) {
-            .nav-container {
-                padding: 0 1rem;
-            }
 
-            .nav-logo {
-                font-size: 1rem;
-            }
-
-            .cta-button {
+            .cta-button,
+            .whatsapp-button {
+                font-size: 0.95rem;
                 padding: 0.875rem 1.75rem;
-                font-size: 1rem;
-            }
-
-            .section-title {
-                font-size: 1.75rem;
-            }
-
-            .about-main-title {
-                font-size: 2rem;
-            }
-
-            .social-icon {
-                width: 40px;
-                height: 40px;
-            }
-
-            .about-image-right {
-                height: 280px;
-            }
-
-            .image-decoration {
-                width: 220px;
-                height: 220px;
-            }
-
-            .image-container {
-                width: 220px;
-                height: 220px;
-                border-width: 5px;
-            }
-
-            .category-card {
-                padding: 1.5rem;
             }
 
             .product-image {
                 height: 180px;
-            }
-
-            .whatsapp-button {
-                padding: 1rem 2rem;
-                font-size: 1rem;
             }
         }
     </style>
@@ -854,44 +738,52 @@
         <div class="hero-content">
             <h1>Equipamiento profesional para tu negocio</h1>
             <p>Automatizamos tu proceso de cotización con atención inmediata por WhatsApp</p>
-            <a href="https://wa.me/593XXXXXXXXX?text=Hola,%20quiero%20una%20cotización" class="cta-button">Cotizar por
-                WhatsApp</a>
+            <button class="cta-button" id="btnHeroWhatsApp" onclick="abrirWhatsAppDesdeHero()">
+                💬 Cotizar por WhatsApp
+            </button>
+            <div class="error-message" id="errorHero"></div>
         </div>
     </section>
 
-<!-- About Section -->
+    <!-- About Section -->
     <section class="about" id="sobre-nosotros">
         <div class="container">
             <div class="about-wrapper">
                 <div class="about-content-left">
-                    <h2 class="about-main-title"><b>Sobre</b><br><span class="highlight-underline"><b>Nosotros</b></span></h2>
+                    <h2 class="about-main-title"><b>Sobre</b><br><span
+                            class="highlight-underline"><b>Nosotros</b></span></h2>
                     <div class="social-icons">
-                        <a href="https://www.instagram.com/novamind_automation/" class="social-icon" aria-label="Instagram" title="Instagram">
-                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <a href="https://www.instagram.com/fresst.ec/" class="social-icon" aria-label="Instagram"
+                            title="Instagram">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2">
                                 <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
                                 <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
                                 <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
                             </svg>
                         </a>
-                        <a href="https://www.tiktok.com/@novamind_automation?_r=1&_t=ZM-92Fj7doz3cq" class="social-icon" aria-label="TikTok" title="TikTok">
+                        <a href="https://www.tiktok.com/@fresst.ec" class="social-icon" aria-label="TikTok"
+                            title="TikTok">
                             <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
-                                <path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64 2.93 2.93 0 0 1 .88.13V9.4a6.84 6.84 0 0 0-1-.05A6.33 6.33 0 0 0 5 20.1a6.34 6.34 0 0 0 10.86-4.43v-7a8.16 8.16 0 0 0 4.77 1.52v-3.4a4.85 4.85 0 0 1-1-.1z"/>
+                                <path
+                                    d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64 2.93 2.93 0 0 1 .88.13V9.4a6.84 6.84 0 0 0-1-.05A6.33 6.33 0 0 0 5 20.1a6.34 6.34 0 0 0 10.86-4.43v-7a8.16 8.16 0 0 0 4.77 1.52v-3.4a4.85 4.85 0 0 1-1-.1z" />
                             </svg>
                         </a>
                     </div>
-                    <p class="about-description">Somos Fresst, líderes en equipamiento profesional para negocios gastronómicos y comerciales. Con años de experiencia en el mercado, nos especializamos en proporcionar soluciones completas de refrigeración, cocción, mobiliario y equipos especiales.</p>
+                    <p class="about-description">Somos Fresst, líderes en equipamiento profesional para negocios
+                        gastronómicos y comerciales. Con años de experiencia en el mercado, nos especializamos en
+                        proporcionar soluciones completas de refrigeración, cocción, mobiliario y equipos especiales.
+                    </p>
                 </div>
                 <div class="about-image-right">
-                    <!-- INSTRUCCIÓN: Coloca aquí la URL de tu imagen del negocio -->
                     <div class="image-decoration"></div>
                     <div class="image-container">
-                        <img src="images/negocio.jpeg" alt="Sobre Fress" onerror="this.style.display='none'">
+                        <img src="images/negocio.jpeg" alt="Sobre Fresst" onerror="this.style.display='none'">
                     </div>
                 </div>
             </div>
         </div>
     </section>
-
 
     <!-- Categories Section -->
     <section class="categories" id="categorias">
@@ -930,7 +822,7 @@
             <h2 class="section-title">Nuestros Productos</h2>
             <div class="filter-info">
                 <span id="filter-text">Mostrando todos los productos</span>
-                <a href="#" class="clear-filter" id="clear-filter" style="display: none;">Ver todos</a>
+                <button id="clear-filter" class="clear-filter" style="display: none;">Ver todos</button>
             </div>
             <div class="products-grid" id="products-grid">
                 <!-- Refrigeración -->
@@ -938,67 +830,104 @@
                     <div class="product-image">
                         <img src="images/frigorifico.png" alt="Frigoríficos" onerror="this.style.display='none'">
                     </div>
-                    <div>
-                        <h3>Frigoríficos</h3>
-                        <span class="product-category">Refrigeración</span>
+                    <div class="product-info">
+                        <div>
+                            <h3>Frigoríficos</h3>
+                            <span class="product-category">Refrigeración</span>
+                        </div>
+                        <button class="product-button"
+                            onclick="abrirWhatsAppProducto(this, 'Frigoríficos', 'refrigeracion')">
+                            💬 Cotizar
+                        </button>
+                        <div class="error-message"></div>
                     </div>
-                    <a href="https://wa.me/593XXXXXXXXX?text=Hola,%20quiero%20cotizar%20el%20producto:%20Frigoríficos"
-                        class="product-button">Cotizar por WhatsApp</a>
                 </div>
+
                 <div class="product-card" data-category="refrigeracion">
                     <div class="product-image">
-                        <img src="images/frigoVertical.jpg" alt="Vitrinas Horizontales" onerror="this.style.display='none'">
+                        <img src="images/frigoVertical.jpg" alt="Vitrinas Horizontales"
+                            onerror="this.style.display='none'">
                     </div>
-                    <div>
-                        <h3>Vitrinas Horizontales</h3>
-                        <span class="product-category">Refrigeración</span>
+                    <div class="product-info">
+                        <div>
+                            <h3>Vitrinas Horizontales</h3>
+                            <span class="product-category">Refrigeración</span>
+                        </div>
+                        <button class="product-button"
+                            onclick="abrirWhatsAppProducto(this, 'Vitrinas Horizontales', 'refrigeracion')">
+                            💬 Cotizar
+                        </button>
+                        <div class="error-message"></div>
                     </div>
-                    <a href="https://wa.me/593XXXXXXXXX?text=Hola,%20quiero%20cotizar%20el%20producto:%20Vitrinas%20Horizontales"
-                        class="product-button">Cotizar por WhatsApp</a>
                 </div>
+
                 <div class="product-card" data-category="refrigeracion">
                     <div class="product-image">
                         <img src="images/panoramica.jpg" alt="Vitrinas Verticales" onerror="this.style.display='none'">
                     </div>
-                    <div>
-                        <h3>Vitrinas Verticales</h3>
-                        <span class="product-category">Refrigeración</span>
+                    <div class="product-info">
+                        <div>
+                            <h3>Vitrinas Verticales</h3>
+                            <span class="product-category">Refrigeración</span>
+                        </div>
+                        <button class="product-button"
+                            onclick="abrirWhatsAppProducto(this, 'Vitrinas Verticales', 'refrigeracion')">
+                            💬 Cotizar
+                        </button>
+                        <div class="error-message"></div>
                     </div>
-                    <a href="https://wa.me/593XXXXXXXXX?text=Hola,%20quiero%20cotizar%20el%20producto:%20Vitrinas%20Verticales"
-                        class="product-button">Cotizar por WhatsApp</a>
                 </div>
+
                 <div class="product-card" data-category="refrigeracion">
                     <div class="product-image">
                         <img src="images/mostradores_caja.jpg" alt="Vitrinas con Caja">
                     </div>
-                    <div>
-                        <h3>Vitrinas con Caja</h3>
-                        <span class="product-category">Refrigeración</span>
+                    <div class="product-info">
+                        <div>
+                            <h3>Vitrinas con Caja</h3>
+                            <span class="product-category">Refrigeración</span>
+                        </div>
+                        <button class="product-button"
+                            onclick="abrirWhatsAppProducto(this, 'Vitrinas con Caja', 'refrigeracion')">
+                            💬 Cotizar
+                        </button>
+                        <div class="error-message"></div>
                     </div>
-                    <a href="https://wa.me/593XXXXXXXXX?text=Hola,%20quiero%20cotizar%20el%20producto:%20Vitrinas%20con%20Caja"
-                        class="product-button">Cotizar por WhatsApp</a>
                 </div>
+
                 <div class="product-card" data-category="refrigeracion">
                     <div class="product-image">
-                        <img src="images/mostradores_sin_caja.jpg" alt="Vitrinas sin Caja" onerror="this.style.display='none'">
+                        <img src="images/mostradores_sin_caja.jpg" alt="Vitrinas sin Caja"
+                            onerror="this.style.display='none'">
                     </div>
-                    <div>
-                        <h3>Vitrinas sin Caja</h3>
-                        <span class="product-category">Refrigeración</span>
+                    <div class="product-info">
+                        <div>
+                            <h3>Vitrinas sin Caja</h3>
+                            <span class="product-category">Refrigeración</span>
+                        </div>
+                        <button class="product-button"
+                            onclick="abrirWhatsAppProducto(this, 'Vitrinas sin Caja', 'refrigeracion')">
+                            💬 Cotizar
+                        </button>
+                        <div class="error-message"></div>
                     </div>
-                    <a href="https://wa.me/593XXXXXXXXX?text=Hola,%20quiero%20cotizar%20el%20producto:%20Vitrinas%20sin%20Caja"
-                        class="product-button">Cotizar por WhatsApp</a>
                 </div>
+
                 <div class="product-card" data-category="refrigeracion">
                     <div class="product-image">
                         <img src="images/bomboneras.png" alt="Bomboneras" onerror="this.style.display='none'">
                     </div>
-                    <div>
-                        <h3>Bomboneras</h3>
-                        <span class="product-category">Refrigeración</span>
+                    <div class="product-info">
+                        <div>
+                            <h3>Bomboneras</h3>
+                            <span class="product-category">Refrigeración</span>
+                        </div>
+                        <button class="product-button"
+                            onclick="abrirWhatsAppProducto(this, 'Bomboneras', 'refrigeracion')">
+                            💬 Cotizar
+                        </button>
+                        <div class="error-message"></div>
                     </div>
-                    <a href="https://wa.me/593XXXXXXXXX?text=Hola,%20quiero%20cotizar%20el%20producto:%20Bomboneras"
-                        class="product-button">Cotizar por WhatsApp</a>
                 </div>
 
                 <!-- Cocción -->
@@ -1006,56 +935,81 @@
                     <div class="product-image">
                         <img src="images/horno.jpg" alt="Hornos" onerror="this.style.display='none'">
                     </div>
-                    <div>
-                        <h3>Hornos</h3>
-                        <span class="product-category">Cocción</span>
+                    <div class="product-info">
+                        <div>
+                            <h3>Hornos</h3>
+                            <span class="product-category">Cocción</span>
+                        </div>
+                        <button class="product-button" onclick="abrirWhatsAppProducto(this, 'Hornos', 'coccion')">
+                            💬 Cotizar
+                        </button>
+                        <div class="error-message"></div>
                     </div>
-                    <a href="https://wa.me/593XXXXXXXXX?text=Hola,%20quiero%20cotizar%20el%20producto:%20Hornos"
-                        class="product-button">Cotizar por WhatsApp</a>
                 </div>
+
                 <div class="product-card" data-category="coccion">
                     <div class="product-image">
                         <img src="images/freidora.jpg" alt="Freidoras" onerror="this.style.display='none'">
                     </div>
-                    <div>
-                        <h3>Freidoras</h3>
-                        <span class="product-category">Cocción</span>
+                    <div class="product-info">
+                        <div>
+                            <h3>Freidoras</h3>
+                            <span class="product-category">Cocción</span>
+                        </div>
+                        <button class="product-button" onclick="abrirWhatsAppProducto(this, 'Freidoras', 'coccion')">
+                            💬 Cotizar
+                        </button>
+                        <div class="error-message"></div>
                     </div>
-                    <a href="https://wa.me/593XXXXXXXXX?text=Hola,%20quiero%20cotizar%20el%20producto:%20Freidoras"
-                        class="product-button">Cotizar por WhatsApp</a>
                 </div>
+
                 <div class="product-card" data-category="coccion">
                     <div class="product-image">
                         <img src="images/cocina.jpg" alt="Cocinas" onerror="this.style.display='none'">
                     </div>
-                    <div>
-                        <h3>Cocinas</h3>
-                        <span class="product-category">Cocción</span>
+                    <div class="product-info">
+                        <div>
+                            <h3>Cocinas</h3>
+                            <span class="product-category">Cocción</span>
+                        </div>
+                        <button class="product-button" onclick="abrirWhatsAppProducto(this, 'Cocinas', 'coccion')">
+                            💬 Cotizar
+                        </button>
+                        <div class="error-message"></div>
                     </div>
-                    <a href="https://wa.me/593XXXXXXXXX?text=Hola,%20quiero%20cotizar%20el%20producto:%20Cocinas"
-                        class="product-button">Cotizar por WhatsApp</a>
                 </div>
+
                 <div class="product-card" data-category="coccion">
                     <div class="product-image">
                         <img src="images/asadero.jpg" alt="Asaderos" onerror="this.style.display='none'">
                     </div>
-                    <div>
-                        <h3>Asaderos</h3>
-                        <span class="product-category">Cocción</span>
+                    <div class="product-info">
+                        <div>
+                            <h3>Asaderos</h3>
+                            <span class="product-category">Cocción</span>
+                        </div>
+                        <button class="product-button" onclick="abrirWhatsAppProducto(this, 'Asaderos', 'coccion')">
+                            💬 Cotizar
+                        </button>
+                        <div class="error-message"></div>
                     </div>
-                    <a href="https://wa.me/593XXXXXXXXX?text=Hola,%20quiero%20cotizar%20el%20producto:%20Asaderos"
-                        class="product-button">Cotizar por WhatsApp</a>
                 </div>
+
                 <div class="product-card" data-category="coccion">
                     <div class="product-image">
                         <img src="images/salchipapera.jpg" alt="Salchipaperas" onerror="this.style.display='none'">
                     </div>
-                    <div>
-                        <h3>Salchipaperas</h3>
-                        <span class="product-category">Cocción</span>
+                    <div class="product-info">
+                        <div>
+                            <h3>Salchipaperas</h3>
+                            <span class="product-category">Cocción</span>
+                        </div>
+                        <button class="product-button"
+                            onclick="abrirWhatsAppProducto(this, 'Salchipaperas', 'coccion')">
+                            💬 Cotizar
+                        </button>
+                        <div class="error-message"></div>
                     </div>
-                    <a href="https://wa.me/593XXXXXXXXX?text=Hola,%20quiero%20cotizar%20el%20producto:%20Salchipaperas"
-                        class="product-button">Cotizar por WhatsApp</a>
                 </div>
 
                 <!-- Mobiliario -->
@@ -1063,45 +1017,66 @@
                     <div class="product-image">
                         <img src="images/mesa_acero.png" alt="Mesas de Acero" onerror="this.style.display='none'">
                     </div>
-                    <div>
-                        <h3>Mesas de Acero</h3>
-                        <span class="product-category">Mobiliario</span>
+                    <div class="product-info">
+                        <div>
+                            <h3>Mesas de Acero</h3>
+                            <span class="product-category">Mobiliario</span>
+                        </div>
+                        <button class="product-button"
+                            onclick="abrirWhatsAppProducto(this, 'Mesas de Acero', 'mobiliario')">
+                            💬 Cotizar
+                        </button>
+                        <div class="error-message"></div>
                     </div>
-                    <a href="https://wa.me/593XXXXXXXXX?text=Hola,%20quiero%20cotizar%20el%20producto:%20Mesas%20de%20Acero"
-                        class="product-button">Cotizar por WhatsApp</a>
                 </div>
+
                 <div class="product-card" data-category="mobiliario">
                     <div class="product-image">
                         <img src="images/estanteria1.png" alt="Estanterías" onerror="this.style.display='none'">
                     </div>
-                    <div>
-                        <h3>Estanterías</h3>
-                        <span class="product-category">Mobiliario</span>
+                    <div class="product-info">
+                        <div>
+                            <h3>Estanterías</h3>
+                            <span class="product-category">Mobiliario</span>
+                        </div>
+                        <button class="product-button"
+                            onclick="abrirWhatsAppProducto(this, 'Estanterías', 'mobiliario')">
+                            💬 Cotizar
+                        </button>
+                        <div class="error-message"></div>
                     </div>
-                    <a href="https://wa.me/593XXXXXXXXX?text=Hola,%20quiero%20cotizar%20el%20producto:%20Estanterías"
-                        class="product-button">Cotizar por WhatsApp</a>
                 </div>
+
                 <div class="product-card" data-category="mobiliario">
                     <div class="product-image">
                         <img src="images/gondola.jpg" alt="Góndolas" onerror="this.style.display='none'">
                     </div>
-                    <div>
-                        <h3>Góndolas</h3>
-                        <span class="product-category">Mobiliario</span>
+                    <div class="product-info">
+                        <div>
+                            <h3>Góndolas</h3>
+                            <span class="product-category">Mobiliario</span>
+                        </div>
+                        <button class="product-button" onclick="abrirWhatsAppProducto(this, 'Góndolas', 'mobiliario')">
+                            💬 Cotizar
+                        </button>
+                        <div class="error-message"></div>
                     </div>
-                    <a href="https://wa.me/593XXXXXXXXX?text=Hola,%20quiero%20cotizar%20el%20producto:%20Góndolas"
-                        class="product-button">Cotizar por WhatsApp</a>
                 </div>
+
                 <div class="product-card" data-category="mobiliario">
                     <div class="product-image">
                         <img src="images/panadera.png" alt="Paneras" onerror="this.style.display='none'">
                     </div>
-                    <div>
-                        <h3>Paneras</h3>
-                        <span class="product-category">Mobiliario</span>
+                    <div class="product-info">
+                        <div>
+                            <h3>Paneras</h3>
+                            <span class="product-category">Mobiliario</span>
+                        </div>
+                        <button class="product-button" onclick="abrirWhatsAppProducto(this, 'Paneras', 'mobiliario')">
+                            💬 Cotizar
+                        </button>
+                        <div class="error-message"></div>
                     </div>
-                    <a href="https://wa.me/593XXXXXXXXX?text=Hola,%20quiero%20cotizar%20el%20producto:%20Paneras"
-                        class="product-button">Cotizar por WhatsApp</a>
                 </div>
 
                 <!-- Equipos Especiales -->
@@ -1109,34 +1084,50 @@
                     <div class="product-image">
                         <img src="images/hotdog.png" alt="Carros de Hotdogs" onerror="this.style.display='none'">
                     </div>
-                    <div>
-                        <h3>Carros de Hotdogs</h3>
-                        <span class="product-category">Equipos Especiales</span>
+                    <div class="product-info">
+                        <div>
+                            <h3>Carros de Hotdogs</h3>
+                            <span class="product-category">Equipos Especiales</span>
+                        </div>
+                        <button class="product-button"
+                            onclick="abrirWhatsAppProducto(this, 'Carros de Hotdogs', 'especiales')">
+                            💬 Cotizar
+                        </button>
+                        <div class="error-message"></div>
                     </div>
-                    <a href="https://wa.me/593XXXXXXXXX?text=Hola,%20quiero%20cotizar%20el%20producto:%20Carros%20de%20Hotdogs"
-                        class="product-button">Cotizar por WhatsApp</a>
                 </div>
+
                 <div class="product-card" data-category="especiales">
                     <div class="product-image">
                         <img src="images/balanza_normal.jpg" alt="Balanza" onerror="this.style.display='none'">
                     </div>
-                    <div>
-                        <h3>Balanza</h3>
-                        <span class="product-category">Equipos Especiales</span>
+                    <div class="product-info">
+                        <div>
+                            <h3>Balanza</h3>
+                            <span class="product-category">Equipos Especiales</span>
+                        </div>
+                        <button class="product-button" onclick="abrirWhatsAppProducto(this, 'Balanza', 'especiales')">
+                            💬 Cotizar
+                        </button>
+                        <div class="error-message"></div>
                     </div>
-                    <a href="https://wa.me/593XXXXXXXXX?text=Hola,%20quiero%20cotizar%20el%20producto:%20Balanza"
-                        class="product-button">Cotizar por WhatsApp</a>
                 </div>
+
                 <div class="product-card" data-category="especiales">
                     <div class="product-image">
                         <img src="images/balanza.png" alt="Balanza Digital" onerror="this.style.display='none'">
                     </div>
-                    <div>
-                        <h3>Balanza Digital</h3>
-                        <span class="product-category">Equipos Especiales</span>
+                    <div class="product-info">
+                        <div>
+                            <h3>Balanza Digital</h3>
+                            <span class="product-category">Equipos Especiales</span>
+                        </div>
+                        <button class="product-button"
+                            onclick="abrirWhatsAppProducto(this, 'Balanza Digital', 'especiales')">
+                            💬 Cotizar
+                        </button>
+                        <div class="error-message"></div>
                     </div>
-                    <a href="https://wa.me/593XXXXXXXXX?text=Hola,%20quiero%20cotizar%20el%20producto:%20Balanza%20Digital"
-                        class="product-button">Cotizar por WhatsApp</a>
                 </div>
             </div>
         </div>
@@ -1147,10 +1138,10 @@
         <div class="container">
             <h2>¿Listo para equipar tu negocio?</h2>
             <p>Obtén tu cotización personalizada en minutos. Nuestro equipo está listo para atenderte.</p>
-            <a href="https://wa.me/593XXXXXXXXX?text=Hola,%20quiero%20una%20cotización" class="whatsapp-button">
-                <span style="font-size: 1.5rem;">💬</span>
-                Cotizar ahora por WhatsApp
-            </a>
+            <button class="whatsapp-button" id="btnCtaWhatsApp" onclick="abrirWhatsAppDesdeContacto()">
+                💬 Cotizar ahora por WhatsApp
+            </button>
+            <div class="error-message" id="errorContacto"></div>
         </div>
     </section>
 
@@ -1175,7 +1166,7 @@
                 </div>
                 <div class="trust-item">
                     <div class="trust-icon">
-                        <img src="images/entrega-urgente.png" alt="entrega urgente" style="width: 50px; height: 50px;   ">
+                        <img src="images/entrega-urgente.png" alt="entrega urgente" style="width: 50px; height: 50px;">
                     </div>
                     <h3>Entrega Rápida</h3>
                     <p>Servicio de instalación y entrega en todo el país.</p>
@@ -1188,18 +1179,119 @@
     <footer>
         <div class="container">
             <div class="footer-content">
-                <h3>NovaMind Automation</h3>
+                <h3>FRESST</h3>
                 <div class="footer-contact">
-                    <p>Contáctanos: <a href="https://wa.me/593XXXXXXXXX">WhatsApp</a></p>
+                    <p>Contáctanos: <button onclick="abrirWhatsAppDesdeFooter()"
+                            style="background: none; border: none; color: #2F80ED; cursor: pointer; text-decoration: underline;">WhatsApp</button>
+                    </p>
                 </div>
                 <div class="footer-copy">
-                    <p>&copy; 2024 NovaMind Automation. Todos los derechos reservados.</p>
+                    <p>&copy; 2024 FRESST. Todos los derechos reservados.</p>
                 </div>
             </div>
         </div>
     </footer>
 
     <script>
+        // ⭐ CONFIGURACIÓN DEL BACKEND
+        const BACKEND_URL = 'http://localhost:8000'; // Cambiar a tu URL de producción
+
+        // ⭐ FUNCIÓN PRINCIPAL: Iniciar chat con backend
+        async function iniciarChat(nombre = '', referencia = 'web') {
+            try {
+                const response = await fetch(`${BACKEND_URL}/api/whatsapp/iniciar-chat`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        nombre: nombre || 'Cliente FRESST',
+                        email: '',
+                        referencia: referencia
+                    })
+                });
+
+                const data = await response.json();
+
+                if (data.success) {
+                    // ✅ Abrir WhatsApp automáticamente
+                    window.open(data.link, '_blank');
+                    console.log('✅ Chat iniciado:', data.pre_lead_id);
+                    return true;
+                } else {
+                    console.error('❌ Error:', data.error);
+                    return false;
+                }
+            } catch (error) {
+                console.error('❌ Error de conexión:', error);
+                return false;
+            }
+        }
+
+        // ⭐ DESDE HERO
+        async function abrirWhatsAppDesdeHero() {
+            const btn = document.getElementById('btnHeroWhatsApp');
+            const errorDiv = btn.nextElementSibling;
+
+            btn.disabled = true;
+            btn.textContent = '⏳ Abriendo...';
+            errorDiv.classList.remove('show');
+
+            const exito = await iniciarChat('Cliente FRESST', 'homepage');
+
+            if (!exito) {
+                errorDiv.textContent = 'Error al conectar. Intenta de nuevo.';
+                errorDiv.classList.add('show');
+            }
+
+            btn.disabled = false;
+            btn.textContent = '💬 Cotizar por WhatsApp';
+        }
+
+        // ⭐ DESDE PRODUCTO
+        async function abrirWhatsAppProducto(button, nombreProducto, categoria) {
+            const errorDiv = button.parentElement.querySelector('.error-message');
+
+            button.disabled = true;
+            button.textContent = '⏳ Abriendo...';
+            errorDiv.classList.remove('show');
+
+            const exito = await iniciarChat(`Interesado en ${nombreProducto}`, `producto_${categoria}`);
+
+            if (!exito) {
+                errorDiv.textContent = 'Error. Intenta de nuevo.';
+                errorDiv.classList.add('show');
+            }
+
+            button.disabled = false;
+            button.textContent = '💬 Cotizar';
+        }
+
+        // ⭐ DESDE CTA CONTACTO
+        async function abrirWhatsAppDesdeContacto() {
+            const btn = document.getElementById('btnCtaWhatsApp');
+            const errorDiv = document.getElementById('errorContacto');
+
+            btn.disabled = true;
+            btn.textContent = '⏳ Abriendo...';
+            errorDiv.classList.remove('show');
+
+            const exito = await iniciarChat('Cliente FRESST', 'seccion_contacto');
+
+            if (!exito) {
+                errorDiv.textContent = 'Error al conectar. Intenta de nuevo.';
+                errorDiv.classList.add('show');
+            }
+
+            btn.disabled = false;
+            btn.textContent = '💬 Cotizar ahora por WhatsApp';
+        }
+
+        // ⭐ DESDE FOOTER
+        async function abrirWhatsAppDesdeFooter() {
+            await iniciarChat('Cliente FRESST', 'footer');
+        }
+
         // Category Filter
         const categoryCards = document.querySelectorAll('.category-card');
         const productCards = document.querySelectorAll('.product-card');
@@ -1212,12 +1304,10 @@
                 const category = card.getAttribute('data-category');
 
                 if (activeCategory === category) {
-                    // Deselect
                     card.classList.remove('active');
                     activeCategory = null;
                     showAllProducts();
                 } else {
-                    // Select new category
                     categoryCards.forEach(c => c.classList.remove('active'));
                     card.classList.add('active');
                     activeCategory = category;
@@ -1248,7 +1338,6 @@
             filterText.textContent = `Mostrando ${count} productos de ${categoryName}`;
             clearFilterBtn.style.display = 'inline-block';
 
-            // Scroll to products
             document.getElementById('products-grid').scrollIntoView({ behavior: 'smooth', block: 'start' });
         }
 
@@ -1270,7 +1359,22 @@
             return names[category] || category;
         }
 
-        // Smooth scroll for all anchor links
+        // Menu Mobile Toggle
+        const menuToggle = document.getElementById('menu-toggle');
+        const navMenu = document.getElementById('nav-menu');
+
+        menuToggle.addEventListener('click', () => {
+            navMenu.classList.toggle('active');
+        });
+
+        // Cerrar menu al hacer clic en un link
+        document.querySelectorAll('.nav-menu a').forEach(link => {
+            link.addEventListener('click', () => {
+                navMenu.classList.remove('active');
+            });
+        });
+
+        // Smooth scroll para todos los links
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
                 e.preventDefault();
