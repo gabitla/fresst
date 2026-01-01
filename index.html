@@ -172,6 +172,149 @@
             opacity: 0.7;
         }
 
+        /* MODAL PARA CAPTURAR DATOS */
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 2000;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal-overlay.active {
+            display: flex;
+        }
+
+        .modal-content {
+            background: white;
+            border-radius: 20px;
+            padding: 2rem;
+            max-width: 450px;
+            width: 90%;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            animation: slideUp 0.3s ease-out;
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .modal-header {
+            text-align: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .modal-header h2 {
+            font-size: 1.5rem;
+            color: #1B2A41;
+            margin-bottom: 0.5rem;
+        }
+
+        .modal-header p {
+            color: #666;
+            font-size: 0.95rem;
+        }
+
+        .modal-form {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .form-group label {
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+            color: #1B2A41;
+            font-size: 0.9rem;
+        }
+
+        .form-group input,
+        .form-group select {
+            padding: 0.875rem;
+            border: 2px solid #E0E0E0;
+            border-radius: 10px;
+            font-size: 1rem;
+            font-family: 'Montserrat', sans-serif;
+            transition: all 0.3s ease;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: #2F80ED;
+            box-shadow: 0 0 0 3px rgba(47, 128, 237, 0.1);
+        }
+
+        .modal-buttons {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .modal-buttons button {
+            flex: 1;
+            padding: 0.875rem;
+            border-radius: 10px;
+            font-weight: 600;
+            font-size: 1rem;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .modal-btn-cancel {
+            background: #F0F0F0;
+            color: #1B2A41;
+        }
+
+        .modal-btn-cancel:hover {
+            background: #E0E0E0;
+        }
+
+        .modal-btn-submit {
+            background: linear-gradient(135deg, #25D366 0%, #1fb855 100%);
+            color: white;
+        }
+
+        .modal-btn-submit:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(37, 211, 102, 0.4);
+        }
+
+        .modal-btn-submit:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+
+        .form-error {
+            color: #d32f2f;
+            font-size: 0.85rem;
+            margin-top: 0.25rem;
+            display: none;
+        }
+
+        .form-error.show {
+            display: block;
+        }
+
         /* Container */
         .container {
             max-width: 1200px;
@@ -698,6 +841,11 @@
                 width: 100%;
                 min-width: auto;
             }
+
+            .modal-content {
+                width: 95%;
+                padding: 1.5rem;
+            }
         }
 
         @media (max-width: 480px) {
@@ -711,11 +859,70 @@
             .product-image {
                 height: 180px;
             }
+
+            .modal-content {
+                width: 100%;
+                margin: 1rem;
+            }
         }
     </style>
 </head>
 
 <body>
+    <!-- Modal para capturar datos -->
+    <div class="modal-overlay" id="modalCaptura">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>📞 Iniciemos tu consulta</h2>
+                <p>Cuéntanos un poco sobre ti para mejor atenderte</p>
+            </div>
+
+            <form class="modal-form" id="formCaptura">
+                <div class="form-group">
+                    <label for="nombre">Nombre *</label>
+                    <input type="text" id="nombre" name="nombre" required placeholder="Tu nombre completo">
+                    <span class="form-error" id="error-nombre"></span>
+                </div>
+
+                <div class="form-group">
+                    <label for="telefono">Teléfono/WhatsApp *</label>
+                    <input type="tel" id="telefono" name="telefono" required placeholder="+593 98xxx xxxx">
+                    <span class="form-error" id="error-telefono"></span>
+                </div>
+
+                <div class="form-group">
+                    <label for="email">Email (opcional)</label>
+                    <input type="email" id="email" name="email" placeholder="tu@email.com">
+                    <span class="form-error" id="error-email"></span>
+                </div>
+
+                <div class="form-group">
+                    <label for="producto">¿Qué producto te interesa? (opcional)</label>
+                    <select id="producto" name="producto">
+                        <option value="">Seleccionar...</option>
+                        <option value="Frigoríficos">Frigoríficos</option>
+                        <option value="Vitrinas Horizontales">Vitrinas Horizontales</option>
+                        <option value="Vitrinas Verticales">Vitrinas Verticales</option>
+                        <option value="Hornos">Hornos</option>
+                        <option value="Freidoras">Freidoras</option>
+                        <option value="Cocinas">Cocinas</option>
+                        <option value="Asaderos">Asaderos</option>
+                        <option value="Mesas de Acero">Mesas de Acero</option>
+                        <option value="Estanterías">Estanterías</option>
+                        <option value="Otro">Otro producto</option>
+                    </select>
+                </div>
+
+                <div class="modal-buttons">
+                    <button type="button" class="modal-buttons button modal-btn-cancel"
+                        onclick="cerrarModal()">Cancelar</button>
+                    <button type="submit" class="modal-buttons button modal-btn-submit" id="btnSubmitModal">Ir a
+                        WhatsApp</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
     <!-- Navigation Menu -->
     <nav>
         <div class="nav-container">
@@ -738,7 +945,7 @@
         <div class="hero-content">
             <h1>Equipamiento profesional para tu negocio</h1>
             <p>Automatizamos tu proceso de cotización con atención inmediata por WhatsApp</p>
-            <button class="cta-button" id="btnHeroWhatsApp" onclick="abrirWhatsAppDesdeHero()">
+            <button class="cta-button" id="btnHeroWhatsApp" onclick="abrirModalCaptura()">
                 💬 Cotizar por WhatsApp
             </button>
             <div class="error-message" id="errorHero"></div>
@@ -835,8 +1042,7 @@
                             <h3>Frigoríficos</h3>
                             <span class="product-category">Refrigeración</span>
                         </div>
-                        <button class="product-button"
-                            onclick="abrirWhatsAppProducto(this, 'Frigoríficos', 'refrigeracion')">
+                        <button class="product-button" onclick="abrirModalConProducto('Frigoríficos', 'refrigeracion')">
                             💬 Cotizar
                         </button>
                         <div class="error-message"></div>
@@ -854,7 +1060,7 @@
                             <span class="product-category">Refrigeración</span>
                         </div>
                         <button class="product-button"
-                            onclick="abrirWhatsAppProducto(this, 'Vitrinas Horizontales', 'refrigeracion')">
+                            onclick="abrirModalConProducto('Vitrinas Horizontales', 'refrigeracion')">
                             💬 Cotizar
                         </button>
                         <div class="error-message"></div>
@@ -871,7 +1077,7 @@
                             <span class="product-category">Refrigeración</span>
                         </div>
                         <button class="product-button"
-                            onclick="abrirWhatsAppProducto(this, 'Vitrinas Verticales', 'refrigeracion')">
+                            onclick="abrirModalConProducto('Vitrinas Verticales', 'refrigeracion')">
                             💬 Cotizar
                         </button>
                         <div class="error-message"></div>
@@ -888,7 +1094,7 @@
                             <span class="product-category">Refrigeración</span>
                         </div>
                         <button class="product-button"
-                            onclick="abrirWhatsAppProducto(this, 'Vitrinas con Caja', 'refrigeracion')">
+                            onclick="abrirModalConProducto('Vitrinas con Caja', 'refrigeracion')">
                             💬 Cotizar
                         </button>
                         <div class="error-message"></div>
@@ -906,7 +1112,7 @@
                             <span class="product-category">Refrigeración</span>
                         </div>
                         <button class="product-button"
-                            onclick="abrirWhatsAppProducto(this, 'Vitrinas sin Caja', 'refrigeracion')">
+                            onclick="abrirModalConProducto('Vitrinas sin Caja', 'refrigeracion')">
                             💬 Cotizar
                         </button>
                         <div class="error-message"></div>
@@ -922,8 +1128,7 @@
                             <h3>Bomboneras</h3>
                             <span class="product-category">Refrigeración</span>
                         </div>
-                        <button class="product-button"
-                            onclick="abrirWhatsAppProducto(this, 'Bomboneras', 'refrigeracion')">
+                        <button class="product-button" onclick="abrirModalConProducto('Bomboneras', 'refrigeracion')">
                             💬 Cotizar
                         </button>
                         <div class="error-message"></div>
@@ -940,7 +1145,7 @@
                             <h3>Hornos</h3>
                             <span class="product-category">Cocción</span>
                         </div>
-                        <button class="product-button" onclick="abrirWhatsAppProducto(this, 'Hornos', 'coccion')">
+                        <button class="product-button" onclick="abrirModalConProducto('Hornos', 'coccion')">
                             💬 Cotizar
                         </button>
                         <div class="error-message"></div>
@@ -956,7 +1161,7 @@
                             <h3>Freidoras</h3>
                             <span class="product-category">Cocción</span>
                         </div>
-                        <button class="product-button" onclick="abrirWhatsAppProducto(this, 'Freidoras', 'coccion')">
+                        <button class="product-button" onclick="abrirModalConProducto('Freidoras', 'coccion')">
                             💬 Cotizar
                         </button>
                         <div class="error-message"></div>
@@ -972,7 +1177,7 @@
                             <h3>Cocinas</h3>
                             <span class="product-category">Cocción</span>
                         </div>
-                        <button class="product-button" onclick="abrirWhatsAppProducto(this, 'Cocinas', 'coccion')">
+                        <button class="product-button" onclick="abrirModalConProducto('Cocinas', 'coccion')">
                             💬 Cotizar
                         </button>
                         <div class="error-message"></div>
@@ -988,7 +1193,7 @@
                             <h3>Asaderos</h3>
                             <span class="product-category">Cocción</span>
                         </div>
-                        <button class="product-button" onclick="abrirWhatsAppProducto(this, 'Asaderos', 'coccion')">
+                        <button class="product-button" onclick="abrirModalConProducto('Asaderos', 'coccion')">
                             💬 Cotizar
                         </button>
                         <div class="error-message"></div>
@@ -1004,8 +1209,7 @@
                             <h3>Salchipaperas</h3>
                             <span class="product-category">Cocción</span>
                         </div>
-                        <button class="product-button"
-                            onclick="abrirWhatsAppProducto(this, 'Salchipaperas', 'coccion')">
+                        <button class="product-button" onclick="abrirModalConProducto('Salchipaperas', 'coccion')">
                             💬 Cotizar
                         </button>
                         <div class="error-message"></div>
@@ -1022,8 +1226,7 @@
                             <h3>Mesas de Acero</h3>
                             <span class="product-category">Mobiliario</span>
                         </div>
-                        <button class="product-button"
-                            onclick="abrirWhatsAppProducto(this, 'Mesas de Acero', 'mobiliario')">
+                        <button class="product-button" onclick="abrirModalConProducto('Mesas de Acero', 'mobiliario')">
                             💬 Cotizar
                         </button>
                         <div class="error-message"></div>
@@ -1039,8 +1242,7 @@
                             <h3>Estanterías</h3>
                             <span class="product-category">Mobiliario</span>
                         </div>
-                        <button class="product-button"
-                            onclick="abrirWhatsAppProducto(this, 'Estanterías', 'mobiliario')">
+                        <button class="product-button" onclick="abrirModalConProducto('Estanterías', 'mobiliario')">
                             💬 Cotizar
                         </button>
                         <div class="error-message"></div>
@@ -1056,7 +1258,7 @@
                             <h3>Góndolas</h3>
                             <span class="product-category">Mobiliario</span>
                         </div>
-                        <button class="product-button" onclick="abrirWhatsAppProducto(this, 'Góndolas', 'mobiliario')">
+                        <button class="product-button" onclick="abrirModalConProducto('Góndolas', 'mobiliario')">
                             💬 Cotizar
                         </button>
                         <div class="error-message"></div>
@@ -1072,7 +1274,7 @@
                             <h3>Paneras</h3>
                             <span class="product-category">Mobiliario</span>
                         </div>
-                        <button class="product-button" onclick="abrirWhatsAppProducto(this, 'Paneras', 'mobiliario')">
+                        <button class="product-button" onclick="abrirModalConProducto('Paneras', 'mobiliario')">
                             💬 Cotizar
                         </button>
                         <div class="error-message"></div>
@@ -1090,7 +1292,7 @@
                             <span class="product-category">Equipos Especiales</span>
                         </div>
                         <button class="product-button"
-                            onclick="abrirWhatsAppProducto(this, 'Carros de Hotdogs', 'especiales')">
+                            onclick="abrirModalConProducto('Carros de Hotdogs', 'especiales')">
                             💬 Cotizar
                         </button>
                         <div class="error-message"></div>
@@ -1106,7 +1308,7 @@
                             <h3>Balanza</h3>
                             <span class="product-category">Equipos Especiales</span>
                         </div>
-                        <button class="product-button" onclick="abrirWhatsAppProducto(this, 'Balanza', 'especiales')">
+                        <button class="product-button" onclick="abrirModalConProducto('Balanza', 'especiales')">
                             💬 Cotizar
                         </button>
                         <div class="error-message"></div>
@@ -1122,8 +1324,7 @@
                             <h3>Balanza Digital</h3>
                             <span class="product-category">Equipos Especiales</span>
                         </div>
-                        <button class="product-button"
-                            onclick="abrirWhatsAppProducto(this, 'Balanza Digital', 'especiales')">
+                        <button class="product-button" onclick="abrirModalConProducto('Balanza Digital', 'especiales')">
                             💬 Cotizar
                         </button>
                         <div class="error-message"></div>
@@ -1138,7 +1339,7 @@
         <div class="container">
             <h2>¿Listo para equipar tu negocio?</h2>
             <p>Obtén tu cotización personalizada en minutos. Nuestro equipo está listo para atenderte.</p>
-            <button class="whatsapp-button" id="btnCtaWhatsApp" onclick="abrirWhatsAppDesdeContacto()">
+            <button class="whatsapp-button" id="btnCtaWhatsApp" onclick="abrirModalCaptura()">
                 💬 Cotizar ahora por WhatsApp
             </button>
             <div class="error-message" id="errorContacto"></div>
@@ -1181,7 +1382,7 @@
             <div class="footer-content">
                 <h3>FRESST</h3>
                 <div class="footer-contact">
-                    <p>Contáctanos: <button onclick="abrirWhatsAppDesdeFooter()"
+                    <p>Contáctanos: <button onclick="abrirModalCaptura()"
                             style="background: none; border: none; color: #2F80ED; cursor: pointer; text-decoration: underline;">WhatsApp</button>
                     </p>
                 </div>
@@ -1194,19 +1395,116 @@
 
     <script>
         // ⭐ CONFIGURACIÓN DEL BACKEND
-        const BACKEND_URL = 'http://localhost:8000'; // Cambiar a tu URL de producción
+        const BACKEND_URL = 'https://52db3349ae3a.ngrok-free.app '; // Cambiar a tu URL en producción
+
+        // ⭐ STATE GLOBAL
+        let productoSeleccionado = null;
+
+        // ⭐ VALIDACIÓN
+        function validarEmail(email) {
+            if (!email) return true; // Email es opcional
+            const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            return regex.test(email);
+        }
+
+        function validarTelefono(telefono) {
+            const regex = /^[\d\s\+\-\(\)]+$/;
+            return regex.length >= 7 && regex.test(telefono);
+        }
+
+        // ⭐ FUNCIONES DE MODAL
+        function abrirModalCaptura() {
+            const modal = document.getElementById('modalCaptura');
+            modal.classList.add('active');
+            document.getElementById('producto').value = '';
+            productoSeleccionado = null;
+            limpiarFormulario();
+        }
+
+        function abrirModalConProducto(nombreProducto, categoria) {
+            productoSeleccionado = { nombre: nombreProducto, categoria: categoria };
+            document.getElementById('producto').value = nombreProducto;
+            abrirModalCaptura();
+        }
+
+        function cerrarModal() {
+            const modal = document.getElementById('modalCaptura');
+            modal.classList.remove('active');
+            limpiarFormulario();
+        }
+
+        function limpiarFormulario() {
+            document.getElementById('formCaptura').reset();
+            document.querySelectorAll('.form-error').forEach(e => {
+                e.classList.remove('show');
+                e.textContent = '';
+            });
+        }
+
+        // ⭐ ENVÍO DEL FORMULARIO
+        document.getElementById('formCaptura').addEventListener('submit', async (e) => {
+            e.preventDefault();
+
+            // Validar
+            const nombre = document.getElementById('nombre').value.trim();
+            const telefono = document.getElementById('telefono').value.trim();
+            const email = document.getElementById('email').value.trim();
+            const producto = document.getElementById('producto').value.trim();
+
+            // Limpiar errores
+            document.querySelectorAll('.form-error').forEach(e => {
+                e.classList.remove('show');
+                e.textContent = '';
+            });
+
+            let valido = true;
+
+            if (!nombre || nombre.length < 3) {
+                document.getElementById('error-nombre').textContent = 'Nombre mínimo 3 caracteres';
+                document.getElementById('error-nombre').classList.add('show');
+                valido = false;
+            }
+
+            if (!telefono || telefono.length < 7) {
+                document.getElementById('error-telefono').textContent = 'Teléfono inválido (mínimo 7 dígitos)';
+                document.getElementById('error-telefono').classList.add('show');
+                valido = false;
+            }
+
+            if (!validarEmail(email)) {
+                document.getElementById('error-email').textContent = 'Email inválido';
+                document.getElementById('error-email').classList.add('show');
+                valido = false;
+            }
+
+            if (!valido) return;
+
+            // ✅ Datos válidos, abrir WhatsApp
+            cerrarModal();
+            await iniciarChat(nombre, email, producto || 'web');
+        });
 
         // ⭐ FUNCIÓN PRINCIPAL: Iniciar chat con backend
-        async function iniciarChat(nombre = '', referencia = 'web') {
+        async function iniciarChat(nombre = '', email = '', referencia = 'web') {
             try {
+                const btn = document.querySelector('.modal-btn-submit');
+                btn.disabled = true;
+                btn.textContent = '⏳ Abriendo...';
+
+                // Preparar nombre con producto si aplica
+                let nombreCompleto = nombre;
+                if (productoSeleccionado) {
+                    nombreCompleto = `${nombre} - Interesado en ${productoSeleccionado.nombre}`;
+                }
+
                 const response = await fetch(`${BACKEND_URL}/api/whatsapp/iniciar-chat`, {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json'
                     },
                     body: JSON.stringify({
-                        nombre: nombre || 'Cliente FRESST',
-                        email: '',
+                        nombre: nombreCompleto,
+                        email: email,
                         referencia: referencia
                     })
                 });
@@ -1216,81 +1514,29 @@
                 if (data.success) {
                     // ✅ Abrir WhatsApp automáticamente
                     window.open(data.link, '_blank');
-                    console.log('✅ Chat iniciado:', data.pre_lead_id);
-                    return true;
+                    console.log('✅ Chat iniciado correctamente');
                 } else {
                     console.error('❌ Error:', data.error);
-                    return false;
+                    alert('Error al iniciar chat. Intenta de nuevo.');
                 }
+
+                btn.disabled = false;
+                btn.textContent = 'Ir a WhatsApp';
+
             } catch (error) {
                 console.error('❌ Error de conexión:', error);
-                return false;
+                alert('Error de conexión. Verifica tu internet.');
+                btn.disabled = false;
+                btn.textContent = 'Ir a WhatsApp';
             }
         }
 
-        // ⭐ DESDE HERO
-        async function abrirWhatsAppDesdeHero() {
-            const btn = document.getElementById('btnHeroWhatsApp');
-            const errorDiv = btn.nextElementSibling;
-
-            btn.disabled = true;
-            btn.textContent = '⏳ Abriendo...';
-            errorDiv.classList.remove('show');
-
-            const exito = await iniciarChat('Cliente FRESST', 'homepage');
-
-            if (!exito) {
-                errorDiv.textContent = 'Error al conectar. Intenta de nuevo.';
-                errorDiv.classList.add('show');
+        // ⭐ CERRAR MODAL AL HACER CLICK FUERA
+        document.getElementById('modalCaptura').addEventListener('click', (e) => {
+            if (e.target === document.getElementById('modalCaptura')) {
+                cerrarModal();
             }
-
-            btn.disabled = false;
-            btn.textContent = '💬 Cotizar por WhatsApp';
-        }
-
-        // ⭐ DESDE PRODUCTO
-        async function abrirWhatsAppProducto(button, nombreProducto, categoria) {
-            const errorDiv = button.parentElement.querySelector('.error-message');
-
-            button.disabled = true;
-            button.textContent = '⏳ Abriendo...';
-            errorDiv.classList.remove('show');
-
-            const exito = await iniciarChat(`Interesado en ${nombreProducto}`, `producto_${categoria}`);
-
-            if (!exito) {
-                errorDiv.textContent = 'Error. Intenta de nuevo.';
-                errorDiv.classList.add('show');
-            }
-
-            button.disabled = false;
-            button.textContent = '💬 Cotizar';
-        }
-
-        // ⭐ DESDE CTA CONTACTO
-        async function abrirWhatsAppDesdeContacto() {
-            const btn = document.getElementById('btnCtaWhatsApp');
-            const errorDiv = document.getElementById('errorContacto');
-
-            btn.disabled = true;
-            btn.textContent = '⏳ Abriendo...';
-            errorDiv.classList.remove('show');
-
-            const exito = await iniciarChat('Cliente FRESST', 'seccion_contacto');
-
-            if (!exito) {
-                errorDiv.textContent = 'Error al conectar. Intenta de nuevo.';
-                errorDiv.classList.add('show');
-            }
-
-            btn.disabled = false;
-            btn.textContent = '💬 Cotizar ahora por WhatsApp';
-        }
-
-        // ⭐ DESDE FOOTER
-        async function abrirWhatsAppDesdeFooter() {
-            await iniciarChat('Cliente FRESST', 'footer');
-        }
+        });
 
         // Category Filter
         const categoryCards = document.querySelectorAll('.category-card');
